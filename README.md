@@ -11,7 +11,7 @@
 
 * Colocar cada arquivo nas suas respectivas pastas do `MetaTrader 4`
 * Importar as tabelas 
-* Liberar portas no Servidor
+* Liberar porta 3306 no servidor (VPS) para receber conexões externas  
 * Usar o Expert Advisor (`server.ex4`) na máquina que irá emitir os sinais, dentro de cada par de moedas que irá operar. 
 * Fazer a mesma coisa com o Expert Advisor (`client.ex4`) nas máquinas dos clientes. 
 * Criar registro na tabela `fx_assinaturas` com os dados e tempo de licença de cada cliente. 
