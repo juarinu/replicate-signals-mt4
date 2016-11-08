@@ -7,7 +7,7 @@
 ###### Arquivo `client.ex4` é o responsável por capturar o registro das ordens no banco de dados e executá-las. (Cliente)
 
 # Manual de instalação
-###### Importante: Alterar os dados de conexão com o banco de dados nos arquivos `server.mq4` e `client.mq4` e compilar. 
+###### Importante: Alterar os dados de conexão com o banco de dados nos arquivos `server.mq4` e `client.mq4` e compilar de novo. 
 
 * Colocar cada arquivo nas suas respectivas pastas do `MetaTrader 4`
 * Importar as tabelas 
