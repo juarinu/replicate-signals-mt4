@@ -14,6 +14,7 @@
 * Liberar porta 3306 no servidor (VPS) para receber conexões externas  
 * Usar o EA (`server.ex4`) na máquina que irá emitir os sinais, dentro de cada par de moedas que irá operar. 
 * Fazer a mesma coisa com o EA (`client.ex4`) nas máquinas dos clientes que irão receber os sinais. 
+* Definir o lote das operações para o cliente na Entrada do EA `client.ex4`
 * Criar registro na tabela `fx_assinaturas` com os dados (id->Nome de usuário na corretora / nome->Nome real) e tempo de licença de cada cliente. 
 * Verificar na aba `Expert Advisors (Robôs)` do terminal se os EAs estão funcionando corretamente. 
 * **Enjoy :)**
