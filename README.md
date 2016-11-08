@@ -9,7 +9,7 @@
 # Manual de instalação
 ###### Importante: Alterar os dados de conexão com o banco de dados nos arquivos `server.mq4` e `client.mq4` e compilar de novo. 
 
-* Colocar cada arquivo nas suas respectivas pastas do `MetaTrader 4`
+* Colocar cada documento nas suas respectivas pastas do `MetaTrader 4`
 * Importar as tabelas 
 * Liberar porta 3306 no servidor (VPS) para receber conexões externas  
 * Usar o EA (`server.ex4`) na máquina que irá emitir os sinais, dentro de cada par de moedas que irá operar. 
