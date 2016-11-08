@@ -1,10 +1,10 @@
 # Replicar sinais através do MT4
 ## Sistema desenvolvido na linguagem MetaQuotes da plataforma de negociação MetaTrader 4 utilizando a lib `MQLMySQL` 
 
-### Arquivos: `server.ex4` e `client.ex4` 
+### Documentos: `server.ex4` e `client.ex4` 
 
-###### Arquivo `server.ex4` é o responsável por enviar o registro das ordens que forem abertas para o banco de dados. (Servidor) 
-###### Arquivo `client.ex4` é o responsável por capturar o registro das ordens no banco de dados e executá-las. (Cliente)
+###### `server.ex4` é o responsável por enviar o registro das ordens que forem abertas para o banco de dados. (Servidor) 
+###### `client.ex4` é o responsável por capturar o registro das ordens no banco de dados e executá-las. (Cliente)
 
 # Manual de instalação
 ###### Importante: Alterar os dados de conexão com o banco de dados nos arquivos `server.mq4` e `client.mq4` e compilar de novo. 
