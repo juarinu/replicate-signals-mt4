@@ -16,7 +16,7 @@
 * Fazer a mesma coisa com o EA (`client.ex4`) nas máquinas dos clientes que irão receber os sinais. 
 * Criar registro na tabela `fx_assinaturas` com os dados (id->Nome de usuário na corretora / nome->Nome real) e tempo de licença de cada cliente. 
 * Verificar na aba `Expert Advisors (Robôs)` do terminal se os EAs estão funcionando corretamente. 
-* Enjoy :) 
+* **Enjoy :)**
 
 ###### Dúvidas: [Meu facebook] (https://www.facebook.com/jaamsavio) .
 ###### Créditos : [HOW TO ACCESS THE MYSQL DATABASE FROM MQL5 (MQL4)] (https://www.mql5.com/pt/articles/932) .
