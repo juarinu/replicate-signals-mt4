@@ -14,15 +14,12 @@ int      TicketBefore;
 double   StopLoss;
 double   TakeProfit;
 double   Preco;
+double   Lote;
 int      TipOP; 
 int      IdOrdem;
 string   Simbolo; 
-string   Corretora;
-string   Minutos;
-string   Hora;
-string   Dia;
-string   Mes;
-string   Ano;   
+int      Numero;
+int      Saldo;
 
 //+------------------------------------------------------------------+
 //| Expert initialization function                                   |
@@ -33,24 +30,20 @@ int OnInit()
    EventSetTimer(1);
 //---
 
-   DBConnection = MySqlConnect("localhost", "root", "311072", "forex", 3306, "", 0);
+   DBConnection = MySqlConnect("52.89.190.145", "jam", "311072", "forex", 3306, "", 0);
       if (DBConnection==-1)
       {
         Print("Error #", MySqlErrorNumber, ": ", MySqlErrorDescription);
         return (1);
       }
       
-   Simbolo=Symbol();
-   Corretora=AccountCompany();              
+   Simbolo=Symbol();           
    TicketAfter=0;
    TicketBefore=1;
    StopLoss=0.0;
    TakeProfit=0.0;
    TipOP=0;
    IdOrdem=0;
-   Dia=Day();
-   Mes=Month();
-   Ano=Year();
 //---
    return(INIT_SUCCEEDED);
   }
@@ -60,7 +53,7 @@ int OnInit()
 //+------------------------------------------------------------------+
 void OnTimer()
   {
-//---
+//---                    
       ModificaStop();
       VerificaDados();
       OrdensAbertas();                             
@@ -88,17 +81,20 @@ int VerificaDados(){
                                     TakeProfit=OrderTakeProfit();
                                     TipOP=OrderType();
                                     Simbolo=OrderSymbol();
-                                    Hora=Hour()+1;
-                                    Minutos=Minute();
+                                    Saldo=AccountBalance();
+                                    Lote=OrderLots();
                                     
-                                    if(Hora==23){
-                                       int n=24;
-                                       Hora=n;
+                                    ////////////// ordem da operação
+                                    if(OrdersTotal()>0){
+                                       Numero=OrdersTotal();
+                                    }else{
+                                       Numero=1;
                                     }
-                                    
+                                    //////////////
+                                       
                                     string Q;
                                     int C,R;
-
+                                 
      
                                     Q = "SELECT id FROM fx WHERE id='"+IdOrdem+"'";
                                     C = MySqlCursorOpen(DBConnection, Q);
@@ -109,13 +105,11 @@ int VerificaDados(){
                                         if(R==0){
                                            EnviarDados(); 
                                         }   
+                                          MySqlCursorClose(R);    
                                     }else
                                          {
                                            Print ("#VerificaDados - Cursor opening failed. Error: ", MySqlErrorDescription);
                                          }
-   
-                                  
-                                        MySqlCursorClose(C);    
                                     }   
                                   }
    return(0);
@@ -130,16 +124,14 @@ int EnviarDados()
 //---
       string query;
       
-      if(Simbolo == Symbol()){
-         query = "INSERT INTO fx (id, corretora, preco, stoploss, takeprofit, ordem, simbolo, dia, mes, ano, hora, minutos) VALUES ('" + IdOrdem + "', '" +  Corretora + "', '" + Preco + "', '" + StopLoss + "', '" + TakeProfit + "', '" +  TipOP + "', '" + Simbolo + "', '" + Dia + "', '" + Mes + "', '" + Ano + "', '" + Hora + "', '" + Minutos + "')";
+         query = "INSERT INTO fx (id, preco, stoploss, takeprofit, ordem, simbolo, numero, lote, saldo_master) VALUES ('" + IdOrdem + "', '" + Preco + "', '" + StopLoss + "', '" + TakeProfit + "', '" +  TipOP + "', '" + Simbolo + "', '" + Numero + "', '" + Lote + "', '" + Saldo + "')";
     
          if (!MySqlExecute(DBConnection, query))
          {
-            Comment("Error #", MySqlErrorNumber, ": ", MySqlErrorDescription, "\nProblem with query: ",query);
+            Alert("Error #", MySqlErrorNumber, ": ", MySqlErrorDescription, "\nProblem with query: ",query);
          }else{
-               Alert("Sinal enviado! #"+Symbol());
+               Print("Sinal enviado! #"+Simbolo);
          }  
-      }
    
  
    return(0);
@@ -190,12 +182,11 @@ int OrdensAbertas(){
              }
          
      }
-       MySqlCursorClose(C);      
+          MySqlCursorClose(R);       
      }else{
      Print ("#OrdensAbertas - Cursor opening failed. Error: ", MySqlErrorDescription);
     }
    
-  
    return(0);
 }
 //+------------------------------------------------------------------+
@@ -239,14 +230,14 @@ int ModificaStop(){
                    {
                      Comment("Error #", MySqlErrorNumber, ": ", MySqlErrorDescription, "\nProblem with query: ",Qe);
                    }else{
-                          Alert("Stop/Take modificado #"+Symbol());
+                          Print("Stop/Take modificado #"+Symbol());
                    }
              
              }
             }
         } 
 
-       MySqlCursorClose(Cursorr);    
+       MySqlCursorClose(Rowss);    
      }else
     {
      Print ("Cursor opening failed. Error: ", MySqlErrorDescription);
