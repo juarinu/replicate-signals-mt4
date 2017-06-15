@@ -29,7 +29,7 @@ int OnInit() {
   EventSetTimer(1);
   //---
 
-  DBConnection = MySqlConnect("52.89.190.145", "jam", "311072", "forex", 3306, "", 0);
+  DBConnection = MySqlConnect("localhost", "test_signals", "test_signals", "test_signals", 3306, "", 0);
   if (DBConnection==-1) {
     Print("Error #", MySqlErrorNumber, ": ", MySqlErrorDescription);
     return (1);
